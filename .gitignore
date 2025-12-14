@@ -11,7 +11,7 @@ build
 # Environment variables
 .env
 .env*.local
-
+***/node_modules
 # IDEs and editors
 .vscode/*
 !.vscode/settings.json

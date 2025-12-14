@@ -1,37 +1,46 @@
 import { NavLink } from "react-router";
 import { ModeToggle } from "./mode-toggle";
-import UserMenu from "./user-menu";
+import { ChevronDown, PhoneCall } from "lucide-react";
 
 export default function Header() {
-	const links = [
-		{ to: "/", label: "Home" },
-		{ to: "/dashboard", label: "Dashboard" },
-		{ to: "/todos", label: "Todos" },
-	] as const;
+  const links = [
+    { to: "/", label: "Home", backdrop: "" },
+    { to: "/packages", label: "Packages", backdrop: <ChevronDown /> },
+    { to: "/bft", label: "BFT", backdrop: <ChevronDown /> },
+    { to: "/options", label: "Options", backdrop: <ChevronDown /> },
+    { to: "/info", label: "Info", backdrop: <ChevronDown /> },
+    { to: "/agreement", label: "Agreement", backdrop: "" },
+  ] as const;
 
-	return (
-		<div>
-			<div className="flex flex-row items-center justify-between px-2 py-1">
-				<nav className="flex gap-4 text-lg">
-					{links.map(({ to, label }) => {
-						return (
-							<NavLink
-								key={to}
-								to={to}
-								className={({ isActive }) => (isActive ? "font-bold" : "")}
-								end
-							>
-								{label}
-							</NavLink>
-						);
-					})}
-				</nav>
-				<div className="flex items-center gap-2">
-					<ModeToggle />
-					<UserMenu />
-				</div>
-			</div>
-			<hr />
-		</div>
-	);
+  return (
+    <div>
+      <div className="flex justify-between items-center  px-2 py-1">
+        <div className=" text-3xl ml-7"> logo</div>
+        <nav className="flex gap-6 text-xl items-center justify-center">
+          {links.map(({ to, label, backdrop }) => {
+            return (
+              <NavLink
+                key={to}
+                to={to}
+                className={({ isActive }) => (isActive ? "font-bold" : "")}
+                end
+              >
+                <div className=" flex">
+                  {label}
+                  {backdrop}
+                </div>
+              </NavLink>
+            );
+          })}
+        </nav>
+        <div className="flex items-center gap-2">
+          <div className=" flex gap-1.5 text-3xl border p-3 rounded-2xl border-black ">
+            <PhoneCall /> 13001100031
+          </div>
+          <ModeToggle />
+        </div>
+      </div>
+      <hr />
+    </div>
+  );
 }
